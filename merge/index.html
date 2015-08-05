@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fusion d'images : aperçu</title>
+    <style>
+        canvas {
+            width: 300px;
+            /*height: 300px;*/
+        }
+        #result {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <img id="img1" src="01.jpg" alt="">
+    <img id="img2" src="02.png" alt=""><br>
+    <button>Fusionner la photo avec le cadre</button><br>
+    <p></p>
+    <canvas id="myCanvas"></canvas>
+
+    <!-- JS -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('button').click(function() {
+                // var c = document.getElementById("myCanvas");
+                // var ctx = c.getContext("2d");
+
+                // var imageObj1 = new Image();
+                // var imageObj2 = new Image();
+                // imageObj1.src = "01.jpg"
+                // imageObj2.src = "02.png";
+
+                // imageObj1.onload = function() {
+                //    ctx.drawImage(imageObj1, 0, 0, 300, 300);
+                //    imageObj2.onload = function() {
+                //       ctx.drawImage(imageObj2, 0, 0);
+                //       var img = c.toDataURL("image/png");
+                //       document.write('<img id="result" src="' + img + '" width="300" height="300"/>');
+                //    }
+                // };
+                var img1 = document.getElementById('img1');
+                var img2 = document.getElementById('img2');
+                var canvas = document.getElementById('myCanvas');
+                var context = canvas.getContext('2d');
+
+                canvas.width = img1.width;
+                canvas.height = img1.height;
+
+                context.globalAlpha = 1.0;
+                context.drawImage(img1, 0, 0);
+                context.globalAlpha = 1.0;
+                context.drawImage(img2, 0, 0);
+            })
+        })
+    </script>
+
+</body>
+</html>

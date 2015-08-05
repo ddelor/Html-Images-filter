@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test sur le crop des images</title>
+    <link rel="stylesheet" href="css/jquery.Jcrop.min.css" type="text/css" media="screen" />
+    <style>
+        body { font-family: Helvetica, Arial, sans-serif; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <img src="../img/city-q-g-940-400-8.jpg" id="cropbox" />
+    <p></p>
+    <button>Envoyer les informations</button>
+    <p></p>
+    <div id="recap" class="hidden">
+        <p>Paramètres de l'image envoyée au serveur :</p>
+        <p>Taille : <span class="width"></span> x <span class="height"></span> px</p>
+        <p>Coordonnées : X1 = <span class="x"></span> / X2 = <span class="x2"></span> / Y1 = <span class="y"></span> / Y2 = <span class="y2"></span></p>
+    </div>
+
+    <!-- JS -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="js/jquery.Jcrop.min.js"></script>
+    <script language="Javascript">
+
+        $(document).ready(function() {
+
+            var width = 0;
+            var height = 0;
+            var x = 0;
+            var x2 = 0;
+            var y = 0;
+            var y2 = 0;
+
+            function showCoords(c) {
+                // variables can be accessed here as
+                // c.x, c.y, c.x2, c.y2, c.w, c.h
+                width = c.w;
+                height = c.h;
+                x = c.x;
+                x2 = c.x2;
+                y = c.y;
+                y2 = c.y2;
+            }
+
+            $('#cropbox').Jcrop({
+                onSelect: showCoords,
+                // onChange: showCoords,
+                bgColor:     'white',
+                bgOpacity:   .4,
+
+                // Préselectionner une zone :
+                // setSelect:   [ 100, 100, 50, 50 ],
+
+                // Ratio (ex: 16/9, ou 1 pour un carré) :
+                aspectRatio: 1
+            });
+
+            $('button').click(function() {
+                $('#recap .width').html(width);
+                $('#recap .height').html(height);
+                $('#recap .x').html(x);
+                $('#recap .x2').html(x2);
+                $('#recap .y').html(y);
+                $('#recap .y2').html(y2);
+                $('#recap').removeClass('hidden');
+            });
+
+        });
+
+    </script>
+</body>
+</html>
